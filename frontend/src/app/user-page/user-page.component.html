@@ -1,3 +1,21 @@
-<p>
-  user-page works!
-</p>
+<mat-toolbar>
+  <span *ngIf="!loading">GitHub User</span>
+</mat-toolbar>
+
+<mat-card *ngIf="loading">
+  <div class="div-loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</mat-card>
+
+<mat-card *ngIf="!loading">
+  <div class="container">
+
+    <h2 class="mat-h2">ID: </h2>
+    <h2 class="mat-h2">Login: </h2>
+    <h2 class="mat-h2">Profile URL: </h2>
+    <h2 class="mat-h2">Created at: </h2>
+
+  </div>
+
+</mat-card>

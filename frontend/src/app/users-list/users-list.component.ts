@@ -12,10 +12,19 @@ export class UsersListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: UsersListDataSource;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name'];
+
+  public loading: boolean;
+
+  constructor() {
+    this.setLoading();
+  }
 
   ngOnInit() {
     this.dataSource = new UsersListDataSource(this.paginator, this.sort);
+  }
+
+  private setLoading(status: boolean = false) {
+    this.loading = status;
   }
 }

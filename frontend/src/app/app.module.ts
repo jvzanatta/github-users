@@ -8,6 +8,10 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule,
   MatPaginatorModule, MatSortModule } from '@angular/material';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { ReposListComponent } from './repos-list/repos-list.component';
@@ -32,7 +36,9 @@ import { ReposListComponent } from './repos-list/repos-list.component';
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
