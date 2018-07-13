@@ -1,21 +1,24 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
+import { Component, OnInit, Input } from '@angular/core';
 import { ReposListDataSource } from './repos-list-datasource';
 
+import { UserService } from '../services/user.service';
 @Component({
   selector: 'repos-list',
   templateUrl: './repos-list.component.html',
   styleUrls: ['./repos-list.component.css']
 })
 export class ReposListComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  dataSource: ReposListDataSource;
+  @Input() username: string;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  dataSource: ReposListDataSource;
+  displayedColumns = ['id', 'name', 'html_url'];
+
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit() {
-    this.dataSource = new ReposListDataSource(this.paginator, this.sort);
+    console.log('repo list component');
+    this.dataSource = new ReposListDataSource(this.userService);
+    this.dataSource.loadRepos(this.username);
   }
 }

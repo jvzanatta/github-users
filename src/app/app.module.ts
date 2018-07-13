@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule,
@@ -30,6 +32,8 @@ import { ReposListComponent } from './repos-list/repos-list.component';
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
+    HttpClientModule,
+    HttpModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
@@ -40,7 +44,10 @@ import { ReposListComponent } from './repos-list/repos-list.component';
     MatCardModule,
     MatProgressSpinnerModule,
   ],
-  providers: [],
+  providers: [
+    HttpClientModule,
+    HttpModule,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

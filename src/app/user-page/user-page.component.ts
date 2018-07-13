@@ -13,11 +13,11 @@ import { User } from '../models/user';
 })
 export class UserPageComponent implements OnInit {
   public user$: Observable<User>;
-  public loading: boolean;
+  username: string;
 
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private route: ActivatedRoute) {
-    // this.setLoading();
   }
 
   ngOnInit() {
@@ -25,15 +25,14 @@ export class UserPageComponent implements OnInit {
   }
 
   private getUser() {
-    // this.setLoading(true);
-    this.user$ = this.route.paramMap.pipe(
-      switchMap(
-        (params: ParamMap) => this.userService.getByUsername(params.get('username'))
-      )
-    );
+    this.username = this.route.snapshot.params['username'];
+    this.user$ = this.userService.getByUsername(this.username);
+
+    // this.user$ = this.route.paramMap.pipe(
+    //   switchMap(
+    //     (params: ParamMap) => this.userService.getByUsername(params.get('username'))
+    //   )
+    // );
   }
 
-  // private setLoading(status: boolean = true) {
-  //   this.loading = status;
-  // }
 }

@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
       data = JSON.parse(data);
       const since = parseInt(req.query.since) + data.length;
       const nextPageLink = `${req.protocol}://${req.get('host') + req.baseUrl}?since=${since}`;
-      const respObject = { link: nextPageLink, data: data };
+      const respObject = { link: nextPageLink, users: data };
 
       res.send(respObject);
     });
@@ -54,8 +54,6 @@ router.get('/:username/details', function(req, res, next) {
 
   https.get(options, (resp) => {
     let data = '';
-
-    // console.log(`${req.protocol}://${req.get('host') + req.baseUrl}`);
 
     resp.on('data', (chunk) => {
       data += chunk;

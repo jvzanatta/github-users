@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import { UserList } from '../models/userlist';
 import { User } from '../models/user';
 import { Repo } from '../models/repo';
 
@@ -12,26 +13,27 @@ const httpOptions = {
   })
 };
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private url = this.router.url.replace('4200', '8080') + '/api/users/'  ;
+  private url = '/api/users/';
 
-  constructor(
-    private http: HttpClient,
-    private router: Router) { }
+  constructor(private http: HttpClient) {
+     }
 
-  getList(since: number = 0) {
-    return this.http.get<User[]>(`${this.url}?since=${since}`);
+  getList(pageIndex = 0, pageSize = 15) {
+    const since = pageIndex * pageSize;
+    return this.http.get<UserList>(`${this.url}?since=${since}`);
   }
 
   getByUsername(username: string) {
-    return this.http.get<User>(`${this.url}/${username}/details`);
+    console.log('getByUsername', username);
+    return this.http.get<User>(`${this.url}${username}/details`);
   }
 
   getReposByUsername(username: string) {
-    return this.http.get<Repo[]>(`${this.url}/${username}/repos`);
+    console.log('getReposByUsername', username);
+    return this.http.get<Repo[]>(`${this.url}${username}/repos`);
   }
 }

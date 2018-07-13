@@ -1,37 +1,35 @@
 <mat-toolbar>
-  <span>GitHub Users</span>
+  <span>User List</span>
 </mat-toolbar>
 
-<mat-card *ngIf="loading">
-  <div class="div-loading-spinner">
-    <mat-spinner></mat-spinner>
-  </div>
-</mat-card>
-
 <div class="mat-elevation-z6" >
-  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async; else table_template">
+      <mat-spinner></mat-spinner>
+  </div>
+  <ng-template #table_template>
+    <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
 
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="login">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Login</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.login}}</mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"
-      routerLink="/user/{{row.id}}" ></mat-row>
-  </mat-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"
+        routerLink="/user/{{row.login}}" ></mat-row>
+    </mat-table>
+
+  </ng-template>
 
   <mat-paginator #paginator
-    [length]="dataSource.data.length"
-    [pageIndex]="0"
-    [pageSize]="50"
-    [pageSizeOptions]="[25, 50, 100, 250]">
+    [length]="totalUsers"
+    [showFirstLastButtons]="showFirstLastButtons"
+    [pageSizeOptions]="[]"
+    [pageSize]="pageSize">
   </mat-paginator>
 </div>
