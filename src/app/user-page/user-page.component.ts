@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { UserService } from '../services/user.service';
@@ -24,15 +23,12 @@ export class UserPageComponent implements OnInit {
     this.getUser();
   }
 
+  /**
+   * Get the user's login and calls the API to get his data
+   */
   private getUser() {
     this.username = this.route.snapshot.params['username'];
     this.user$ = this.userService.getByUsername(this.username);
-
-    // this.user$ = this.route.paramMap.pipe(
-    //   switchMap(
-    //     (params: ParamMap) => this.userService.getByUsername(params.get('username'))
-    //   )
-    // );
   }
 
 }

@@ -13,10 +13,15 @@ import { UserService } from '../services/user.service';
 export class UsersListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  /** Where the first and last buttons from paginator will be displayed */
   showFirstLastButtons: boolean;
+  /** The datasource to the table */
   dataSource: UsersListDataSource;
+  /** The total amount of users (estimated) */
   totalUsers: number;
+  /** The number of itens per page */
   pageSize: number;
+  /** The columns to be displayed */
   displayedColumns = ['id', 'login'];
 
   constructor(private userService: UserService) {
@@ -38,18 +43,30 @@ export class UsersListComponent implements AfterViewInit, OnInit {
       .subscribe();
   }
 
+  /**
+   * Calls the API to get users passing the page's index
+   */
   loadUsersPage() {
     this.dataSource.loadUsers(this.paginator.pageIndex);
   }
 
+  /**
+   * Sets the amount of itens per page
+   */
   setPageSize() {
     this.pageSize = 15;
   }
 
+  /**
+   * Sets the aprox total of users since GitHub does not provide it
+   */
   setPaginatorLength() {
     this.totalUsers = 41187958; // GitHub's API does not provide total users to work with Angular Material Pagination
   }
 
+  /**
+   * Sets wheter the first and last buttons from paginator will be displayed
+   */
   setFirstLastButtons() {
     this.showFirstLastButtons = true;
   }
