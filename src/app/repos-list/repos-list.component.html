@@ -21,7 +21,9 @@
 
         <ng-container matColumnDef="html_url">
           <mat-header-cell *matHeaderCellDef mat-sort-header>URL</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.html_url}}</mat-cell>
+          <mat-cell *matCellDef="let row">
+              <a href="{{row.html_url}}">{{row.html_url}}</a>
+          </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
