@@ -1,21 +1,24 @@
 <mat-toolbar>
-  <span *ngIf="!loading">GitHub User</span>
+  <span>GitHub User</span>
 </mat-toolbar>
 
-<mat-card *ngIf="loading">
+<mat-card>
   <div class="div-loading-spinner">
     <mat-spinner></mat-spinner>
   </div>
 </mat-card>
 
-<mat-card *ngIf="!loading">
-  <div class="container">
+<div class="mat-elevation-z8" >
+  <mat-card >
+    <div class="container" *ngIf="user$ | async as user">
 
-    <h2 class="mat-h2">ID: </h2>
-    <h2 class="mat-h2">Login: </h2>
-    <h2 class="mat-h2">Profile URL: </h2>
-    <h2 class="mat-h2">Created at: </h2>
+      <h2 class="mat-h2">ID: </h2>
+      <h2 class="mat-h2">Login: </h2>
+      <h2 class="mat-h2">Profile URL: </h2>
+      <h2 class="mat-h2">Created at: </h2>
 
-  </div>
+    </div>
+  </mat-card>
 
-</mat-card>
+  <repos-list></repos-list>
+</div>
