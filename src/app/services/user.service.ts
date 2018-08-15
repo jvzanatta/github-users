@@ -20,7 +20,8 @@ export class UserService {
   private url = '/api/users/';
 
   constructor(private http: HttpClient) {
-     }
+  
+  }
 
   getList(pageIndex = 0, pageSize = 15) {
     const since = pageIndex * pageSize;
